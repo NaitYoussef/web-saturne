@@ -1,0 +1,42 @@
+<div class="container">
+  <header class="jumbotron hero-spacer">
+    <h2>Vous êtes connecté en tant que : {{utilisateurCourant.name}}</h2>
+    <p><a [routerLink]="['/accueil', utilisateurCourant]" class="btn btn-primary btn-large">Valider ma connexion</a></p>
+  </header>
+
+  <div class="row">
+
+    <div class="col-lg-6">
+      <div class="container">
+        <h1>Choisir un utilisateur</h1>
+        <form class="form-inline" #connexionForm="ngForm">
+          <select class="form-control" [(ngModel)]="utilisateurCourant" name="utilisateurCourant">
+              <option *ngFor="let utilisateur of utilisateurs" selected = "utilisateurCourant.id == utilisateur.id" 
+              [ngValue]="utilisateur">{{utilisateur.name}}</option>
+          </select>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="container">
+        <h1>Créer un nouvel utilisateur</h1>
+        <form class="form-inline" #utilisateurForm="ngForm" novalidate (ngSubmit)="creerUtilisateur()">
+          <div class="form-group" [ngClass]="{'has-error': name.errors}">
+            <label class="control-label">Nom</label>
+            <input #name="ngModel" type="text" [(ngModel)]="utilisateur.name" name="name" class="form-control" required>
+          </div>
+          <div class="form-group" [ngClass]="{'has-error': mail.errors}">
+            <label class="control-label">Email</label>
+            <input #mail="ngModel" [(ngModel)]="utilisateur.mail" name="mail" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-default" [disabled]="!utilisateurForm.valid">
+          Créer
+        </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</div>

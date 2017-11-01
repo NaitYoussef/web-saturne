@@ -1,0 +1,35 @@
+<div class="row">
+    
+        <div class="col-lg-6">
+            <h1>Liste des Saturnes</h1>
+            <div *ngFor="let saturne of saturnes">
+              <div class="thumbnail">
+                <div class="caption">
+                    <h3>Saturne n°{{saturne.id}} - {{saturne.admin.name}}</h3>
+                    <p>
+                        <button class="btn btn-primary" (click)="inscrireSaturne(saturne.id)" [disabled]="saturne.active">S'inscrire</button>
+                        <button class="btn btn-primary" (click)="demarrerSaturne(saturne.id)" [disabled]="saturne.active">Démarrer</button>
+                        <button class="btn btn-primary" (click)="participerSaturne(saturne.id)" [disabled]="!saturne.active">Participer</button>
+                        <button class="btn btn-primary" (click)="retirerSaturne(saturne.id)" [disabled]="!saturne.active">Retirer</button>
+                        <button class="btn btn-primary" (click)="terminerSaturne(saturne.id)" [disabled]="!saturne.active">Terminer</button>
+                    </p>
+                </div>
+              </div>
+            </div>
+        </div>
+    
+        <div class="col-lg-6">
+          <div class="container">
+            <h1>Créer une nouvelle saturne</h1>
+            <form class="form-inline" #saturneForm="ngForm" novalidate (ngSubmit)="creerSaturne()">
+              <div class="form-group" [ngClass]="{'has-error': mensualite.errors}">
+                <label class="control-label">Mensualité</label>
+                <input #mensualite="ngModel" type="text" [(ngModel)]="saturne.mensualite" name="mensualite" class="form-control" required>
+              </div>
+              <button type="submit" class="btn btn-default" [disabled]="!saturneForm.valid">
+              Créer
+            </button>
+            </form>
+          </div>
+        </div>
+      </div>
